@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-struct process {
+struct Process {
     int pid;
     int burst_time;
     int priority;
@@ -10,15 +10,15 @@ struct process {
 
 int main() {
     int n, i, j;
-    struct process p[20], temp;
+    struct Process p[10], temp;
     float avg_wt = 0, avg_tat = 0;
 
     printf("Enter number of processes: ");
     scanf("%d", &n);
 
     for(i = 0; i < n; i++) {
-        printf("\nProcess %d\n", i+1);
-        p[i].pid = i+1;
+        printf("\nProcess %d\n", i + 1);
+        p[i].pid = i + 1;
 
         printf("Enter Burst Time: ");
         scanf("%d", &p[i].burst_time);
@@ -27,9 +27,9 @@ int main() {
         scanf("%d", &p[i].priority);
     }
 
-    // Sorting based on priority (lower value = higher priority)
-    for(i = 0; i < n-1; i++) {
-        for(j = i+1; j < n; j++) {
+    // Sort processes by priority (lower number = higher priority)
+    for(i = 0; i < n - 1; i++) {
+        for(j = i + 1; j < n; j++) {
             if(p[i].priority > p[j].priority) {
                 temp = p[i];
                 p[i] = p[j];
@@ -49,7 +49,6 @@ int main() {
 
     for(i = 0; i < n; i++) {
         p[i].turnaround_time = p[i].burst_time + p[i].waiting_time;
-
         avg_wt += p[i].waiting_time;
         avg_tat += p[i].turnaround_time;
     }
@@ -58,15 +57,15 @@ int main() {
 
     for(i = 0; i < n; i++) {
         printf("%d\t%d\t%d\t\t%d\t%d\n",
-        p[i].pid,
-        p[i].burst_time,
-        p[i].priority,
-        p[i].waiting_time,
-        p[i].turnaround_time);
+               p[i].pid,
+               p[i].burst_time,
+               p[i].priority,
+               p[i].waiting_time,
+               p[i].turnaround_time);
     }
 
-    printf("\nAverage Waiting Time = %.2f", avg_wt/n);
-    printf("\nAverage Turnaround Time = %.2f\n", avg_tat/n);
+    printf("\nAverage Waiting Time = %.2f", avg_wt / n);
+    printf("\nAverage Turnaround Time = %.2f\n", avg_tat / n);
 
     return 0;
 }
